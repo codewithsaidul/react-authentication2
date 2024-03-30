@@ -27,7 +27,7 @@ export const Header = () => {
               className="menu menu-sm text-3xl dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
             >
               <NavLink to="/">Home</NavLink>
-              <NavLink to="/">User Details</NavLink>
+            <NavLink to="/userDetails">User Details</NavLink>
             </ul>
           </div>
           <a className="text-5xl">MyLogin</a>
@@ -40,7 +40,6 @@ export const Header = () => {
         </div>
         <div className="navbar-end">
           <Link to='/login' className="py-3 px-5 bg-rose-500 text-white rounded-3xl">Login</Link>
-          <Link className="py-3 px-5 ml-5 bg-rose-500 text-white rounded-3xl">Login</Link>
         </div>
       </div>
     </div>

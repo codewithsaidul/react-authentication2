@@ -1,6 +1,30 @@
-
+import { getAuth, GithubAuthProvider, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import app from '../authentication/firebase.init'
 
 export const Login = () => {
+  const auth = getAuth(app);
+  const googleProvider = new GoogleAuthProvider();
+  const githubProvider = new GithubAuthProvider()
+
+  const handleGoogleSignIn = () => {
+    signInWithPopup(auth, googleProvider)
+      .then((result) => {
+        const loggedUser = result.user;
+        console.log(loggedUser);
+      })
+      .catch((error) => console.log(error.message)); 
+  }
+
+
+
+  const handleGithubSignIn = () => {
+    signInWithPopup(auth, githubProvider)
+    .then (result => {
+      const loggedUser = result.user;
+      console.log(loggedUser)
+    })
+    .catch (error => console.log(error.message))
+  }
   return (
     <div className="flex justify-center items-center h-[calc(100vh-64px)]">
       <div className="w-full max-w-md mx-auto mt-10 p-4 rounded-md shadow sm:p-8 bg-gray-900 dark:bg-gray-50 text-gray-100 dark:text-gray-800">
@@ -9,6 +33,7 @@ export const Login = () => {
         </h2>
         <div className="my-6 space-y-4">
           <button
+          onClick={handleGoogleSignIn}
             aria-label="Login with Google"
             type="button"
             className="flex items-center justify-center w-full p-4 space-x-4 border rounded-md focus:ring-2 focus:ring-offset-1 border-gray-400 dark:border-gray-600 focus:ring-violet-400 focus:dark:ring-violet-600"
@@ -22,7 +47,8 @@ export const Login = () => {
             </svg>
             <p>Login with Google</p>
           </button>
-          <button
+          <button 
+            onClick={handleGithubSignIn}
             aria-label="Login with GitHub"
             role="button"
             className="flex items-center justify-center w-full p-4 space-x-4 border rounded-md focus:ring-2 focus:ring-offset-1 border-gray-400 dark:border-gray-600 focus:ring-violet-400 focus:dark:ring-violet-600"
@@ -54,4 +80,4 @@ export const Login = () => {
       </div>
     </div>
   );
-}
+};
