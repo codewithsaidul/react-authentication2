@@ -1,10 +1,11 @@
-import { getAuth, GithubAuthProvider, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { getAuth, GithubAuthProvider, GoogleAuthProvider,TwitterAuthProvider , signInWithPopup } from "firebase/auth";
 import app from '../authentication/firebase.init'
 
 export const Login = () => {
   const auth = getAuth(app);
   const googleProvider = new GoogleAuthProvider();
-  const githubProvider = new GithubAuthProvider()
+  const githubProvider = new GithubAuthProvider();
+  const twitterProvider = new TwitterAuthProvider();
 
   const handleGoogleSignIn = () => {
     signInWithPopup(auth, googleProvider)
@@ -24,6 +25,16 @@ export const Login = () => {
       console.log(loggedUser)
     })
     .catch (error => console.log(error.message))
+  }
+
+
+  const handleTwitterSignIn = () => {
+    signInWithPopup(auth, twitterProvider)
+    .then (result => {
+      const loggedUser = result.user;
+      console.log(loggedUser)
+    })
+    .catch(error => console.log(error.message))
   }
   return (
     <div className="flex justify-center items-center h-[calc(100vh-64px)]">
@@ -63,6 +74,7 @@ export const Login = () => {
             <p>Login with GitHub</p>
           </button>
           <button
+            onClick={handleTwitterSignIn}
             aria-label="Login with Twitter"
             role="button"
             className="flex items-center justify-center w-full p-4 space-x-4 border rounded-md focus:ring-2 focus:ring-offset-1 border-gray-400 dark:border-gray-600 focus:ring-violet-400 focus:dark:ring-violet-600"
